@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ULAVU — Project Documentation | Anna University - MIT Campus</title>
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-900: #0f271d;
+      --primary-800: #163a2a;
+      --primary-700: #1b4332;
+      --primary-600: #245842;
+      --primary-500: #2d6a4f;
+      --primary-100: #d8f3dc;
+      --primary-50: #f0f9f3;
+      
+      --accent-600: #d97706;
+      --accent-500: #f59e0b;
+      --accent-100: #fef3c7;
+      
+      --bg-page: #faf7f2;
+      --bg-surface: #ffffff;
+      --border-subtle: #eee9df;
+      --border-medium: #e0d9cc;
+      
+      --text-main: #18281f;
+      --text-secondary: #3b4d42;
+      --text-muted: #6b7e73;
+      
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      font-size: 11pt;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @page {
+      size: A4;
+      margin: 20mm 15mm 20mm 15mm;
+      @bottom-right {
+        content: counter(page);
+        font-family: var(--font-body);
+        font-size: 9pt;
+        color: var(--text-muted);
+      }
+      @bottom-left {
+        content: "ULAVU Project Documentation — Anna University (MIT Campus)";
+        font-family: var(--font-body);
+        font-size: 8pt;
+        color: var(--text-muted);
+      }
+    }
+
+    .doc-container {
+      max-width: 880px;
+      margin: 0 auto;
+      background: var(--bg-surface);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+      padding: 45px 55px;
+    }
+
+    @media print {
+      body { background: #ffffff; }
+      .doc-container { box-shadow: none; padding: 0; max-width: 100%; }
+      .page-break { page-break-after: always; break-after: page; }
+      .no-print { display: none !important; }
+    }
+
+    /* Print Action Bar */
+    .print-bar {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      z-index: 1000;
+      background: var(--primary-700);
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 9999px;
+      box-shadow: 0 4px 15px rgba(27,67,50,0.3);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .print-bar:hover {
+      background: var(--primary-800);
+      transform: translateY(-1px);
+    }
+
+    /* Cover Page */
+    .cover-page {
+      min-height: 860px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid var(--border-medium);
+      padding: 55px 45px;
+      border-radius: 8px;
+      background: linear-gradient(180deg, #ffffff 0%, var(--bg-page) 100%);
+      margin-bottom: 40px;
+    }
+
+    .cover-header {
+      text-align: center;
+    }
+    .cover-institution {
+      font-family: var(--font-heading);
+      font-size: 15pt;
+      font-weight: 700;
+      color: var(--primary-900);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .cover-dept {
+      font-size: 11pt;
+      color: var(--primary-600);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .cover-emblem {
+      margin: 35px auto;
+      width: 84px;
+      height: 84px;
+      background: var(--primary-700);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 30pt;
+      font-weight: 800;
+      font-family: var(--font-heading);
+      box-shadow: 0 8px 25px rgba(27,67,50,0.25);
+    }
+    .cover-title-group {
+      text-align: center;
+      margin: 15px 0;
+    }
+    .cover-title {
+      font-family: var(--font-heading);
+      font-size: 38pt;
+      font-weight: 800;
+      color: var(--primary-900);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .cover-subtitle {
+      font-family: var(--font-heading);
+      font-size: 15pt;
+      color: var(--primary-600);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    .cover-doc-type {
+      display: inline-block;
+      margin-top: 15px;
+      background: var(--accent-100);
+      color: var(--accent-600);
+      padding: 5px 16px;
+      border-radius: 9999px;
+      font-size: 9.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .cover-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      background: #ffffff;
+      border: 1px solid var(--border-medium);
+      padding: 22px 26px;
+      border-radius: 8px;
+    }
+    .meta-box h4 {
+      font-size: 8.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .meta-box p {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--primary-900);
+    }
+    .meta-box span {
+      font-size: 9.5pt;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .cover-footer {
+      text-align: center;
+      font-size: 9pt;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 18px;
+    }
+
+    /* Headings */
+    h1, h2, h3 {
+      font-family: var(--font-heading);
+      color: var(--primary-900);
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: 20pt;
+      font-weight: 800;
+      margin-top: 35px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--primary-100);
+      page-break-after: avoid;
+    }
+
+    h2 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--primary-800);
+      margin-top: 20px;
+      margin-bottom: 8px;
+      page-break-after: avoid;
+    }
+
+    p {
+      margin-bottom: 11px;
+      color: var(--text-secondary);
+      text-align: justify;
+    }
+
+    strong {
+      color: var(--text-main);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-green { background: var(--primary-100); color: var(--primary-800); }
+    .badge-neutral { background: var(--border-subtle); color: var(--text-secondary); }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 20px 0;
+      font-size: 9.5pt;
+      page-break-inside: avoid;
+    }
+    th, td {
+      padding: 9px 12px;
+      text-align: left;
+      border: 1px solid var(--border-medium);
+    }
+    th {
+      background-color: var(--primary-50);
+      color: var(--primary-900);
+      font-weight: 700;
+      font-family: var(--font-heading);
+    }
+    tr:nth-child(even) td {
+      background-color: #fafaf8;
+    }
+
+    /* Diagrams */
+    .diagram-box {
+      background: var(--bg-page);
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-family: var(--font-mono);
+      font-size: 8.5pt;
+      line-height: 1.4;
+      color: var(--primary-900);
+      white-space: pre;
+      overflow-x: auto;
+      page-break-inside: avoid;
+    }
+
+    /* Callout */
+    .callout-box {
+      background: var(--primary-50);
+      border-left: 4px solid var(--primary-600);
+      padding: 12px 18px;
+      border-radius: 0 6px 6px 0;
+      margin: 14px 0;
+      font-size: 9.5pt;
+    }
+    .callout-box.quote {
+      font-style: italic;
+      background: #ffffff;
+      border: 1px solid var(--border-medium);
+      border-left: 4px solid var(--accent-500);
+    }
+
+    /* Table of Contents */
+    .toc-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px dashed var(--border-subtle);
+      font-size: 10pt;
+    }
+    .toc-item a {
+      color: var(--primary-800);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .toc-item a:hover {
+      text-decoration: underline;
+    }
+    .toc-num {
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 12px;
+      color: var(--text-secondary);
+    }
+    li {
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-bar no-print" onclick="window.print()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+    Print to PDF / Review Copy
+  </button>
+
+  <div class="doc-container">
+
+    <!-- ================= COVER PAGE ================= -->
+    <div class="cover-page">
+      <div class="cover-header">
+        <div class="cover-institution">Anna University - MIT Campus</div>
+        <div class="cover-dept">Department of Computer Science and Engineering (CSE)</div>
+      </div>
+
+      <div class="cover-title-group">
+        <div class="cover-emblem">U</div>
+        <div class="cover-title">ULAVU</div>
+        <div class="cover-subtitle">Direct Farmer–Retailer Produce Connection Platform</div>
+        <div class="cover-doc-type">Project Documentation & Technical Report</div>
+      </div>
+
+      <div class="cover-meta-grid">
+        <div class="meta-box">
+          <h4>Candidate Information</h4>
+          <p>Sujith B</p>
+          <span>Roll Number: <strong>2025503560</strong></span>
+        </div>
+        <div class="meta-box">
+          <h4>Department & Degree</h4>
+          <p>Computer Science and Engineering</p>
+          <span>Department of CSE</span>
+        </div>
+        <div class="meta-box">
+          <h4>Academic Institution</h4>
+          <p>Madras Institute of Technology (MIT)</p>
+          <span>Anna University, Chromepet, Chennai</span>
+        </div>
+        <div class="meta-box">
+          <h4>Project Release Version</h4>
+          <p>Version 1.0 (Core Prototype)</p>
+          <span>Status: Verified & Operational</span>
+        </div>
+      </div>
+
+      <div class="cover-footer">
+        ULAVU Project Documentation &copy; 2026. Department of Computer Science and Engineering, Anna University - MIT Campus.
+      </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- ================= TABLE OF CONTENTS ================= -->
+    <h1>Table of Contents</h1>
+    <ul class="toc-list">
+      <li class="toc-item"><a href="#sec-1">1. Project Overview</a> <span class="toc-num">03</span></li>
+      <li class="toc-item"><a href="#sec-2">2. Problem Statement</a> <span class="toc-num">03</span></li>
+      <li class="toc-item"><a href="#sec-3">3. Proposed Solution</a> <span class="toc-num">04</span></li>
+      <li class="toc-item"><a href="#sec-4">4. Platform Benefits</a> <span class="toc-num">04</span></li>
+      <li class="toc-item"><a href="#sec-5">5. Uniqueness & Philosophy</a> <span class="toc-num">05</span></li>
+      <li class="toc-item"><a href="#sec-6">6. Six-Module Roadmap</a> <span class="toc-num">05</span></li>
+      <li class="toc-item"><a href="#sec-7">7. System Workflow</a> <span class="toc-num">06</span></li>
+      <li class="toc-item"><a href="#sec-8">8. Technology Stack</a> <span class="toc-num">07</span></li>
+      <li class="toc-item"><a href="#sec-9">9. Future Scope</a> <span class="toc-num">07</span></li>
+      <li class="toc-item"><a href="#sec-10">10. Developer Information</a> <span class="toc-num">08</span></li>
+      <li class="toc-item"><a href="#sec-11">11. Conclusion</a> <span class="toc-num">08</span></li>
+    </ul>
+
+    <!-- ================= 1. PROJECT OVERVIEW ================= -->
+    <h1 id="sec-1">1. Project Overview</h1>
+    <p>
+      <strong>ULAVU</strong> is a simple agricultural connectivity platform designed to connect farmers who have produce available with commercial retailers who are looking to procure it.
+    </p>
+    <p>
+      The platform focuses on one straightforward, essential interaction:
+    </p>
+    <div class="callout-box">
+      <strong>Core Interaction:</strong><br>
+      Farmer lists produce &rarr; Retailer discovers produce &rarr; Retailer contacts farmer directly.
+    </div>
+    <p>
+      Rather than attempting to become an over-engineered e-commerce portal with bidding, escrow payments, and rigid market restrictions, ULAVU is designed around <strong>simplicity and accessibility</strong>. It provides an immediate digital connection between rural cultivators and nearby commercial buyers with zero unnecessary friction.
+    </p>
+
+    <!-- ================= 2. PROBLEM STATEMENT ================= -->
+    <h1 id="sec-2">2. Problem Statement</h1>
+    <p>
+      Agricultural produce distribution in regional markets faces several practical communication bottlenecks:
+    </p>
+    <ul>
+      <li><strong>Difficulty in Reaching Buyers:</strong> Farmers often struggle to discover and reach commercial buyers, supermarkets, and greengrocers beyond their immediate village gate or local commission brokers.</li>
+      <li><strong>Fragmented Produce Availability:</strong> Retailers and procurement managers lack real-time visibility into what neighboring farmers are harvesting on any given day. Sourcing often depends on informal word-of-mouth or costly intermediary networks.</li>
+      <li><strong>Communication Inefficiency:</strong> Information about available crop volumes is scattered across unorganized channels, creating localized gluts in one area while neighboring towns face procurement shortages.</li>
+      <li><strong>Technological Alienation:</strong> Existing agricultural apps often fail because they require lengthy onboarding, tax IDs, quality certificates, and multi-step pricing negotiations. Farmers are hesitant to adopt tools that require extensive data entry.</li>
+      <li><strong>Need for a Simple Connection Layer:</strong> Cultivators need a lightweight tool that makes their harvest discoverable without demanding excessive administrative effort.</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- ================= 3. PROPOSED SOLUTION ================= -->
+    <h1 id="sec-3">3. Proposed Solution</h1>
+    <p>
+      ULAVU solves this challenge through a deliberately simple, two-sided workflow:
+    </p>
+
+    <h2>Farmer</h2>
+    <p>The farmer creates a minimal profile containing only:</p>
+    <ul>
+      <li><strong>Name</strong></li>
+      <li><strong>Mobile Number</strong></li>
+      <li><strong>Location</strong> (Village / Town / District)</li>
+    </ul>
+    <p>To post available harvest produce, the farmer enters only:</p>
+    <ul>
+      <li><strong>Produce Name</strong> (e.g., Tomato, Onion, Watermelon, Banana, Brinjal)</li>
+      <li><strong>Quantity</strong> (Numeric value)</li>
+      <li><strong>Unit</strong> (Strictly restricted to <strong>kg</strong> or <strong>bag</strong>)</li>
+      <li><strong>Location</strong> (Where the crop is available)</li>
+    </ul>
+    <p>
+      <em>No pricing, budgets, or harvest expiration dates are required. Pricing is discussed and agreed upon naturally during direct conversation.</em>
+    </p>
+
+    <h2>Retailer</h2>
+    <p>The commercial buyer accesses the live produce feed:</p>
+    <ul>
+      <li>Browses available produce batches posted by regional farmers.</li>
+      <li>Each listing clearly displays: <strong>Produce Name</strong>, <strong>Quantity</strong>, <strong>Location</strong>, <strong>Farmer Name</strong>, and <strong>Contact Number</strong>.</li>
+      <li>Retailer clicks <strong>Call Farmer</strong> to immediately connect with the grower over phone and finalize the purchase.</li>
+    </ul>
+
+    <!-- ================= 4. BENEFITS ================= -->
+    <h1 id="sec-4">4. Benefits</h1>
+
+    <h2>Benefits to Farmers</h2>
+    <ul>
+      <li><strong>Quick Produce Listing:</strong> Farmers can publish an available harvest batch in under 15 seconds.</li>
+      <li><strong>Minimal Data Entry:</strong> Only requires crop name, quantity in kg/bag, and location.</li>
+      <li><strong>Direct Buyer Access:</strong> Connects directly with commercial retailers and supermarkets across the region.</li>
+      <li><strong>Zero Pricing Pressure:</strong> Avoids forced digital price bidding; terms are finalized via natural phone conversation.</li>
+    </ul>
+
+    <h2>Benefits to Retailers</h2>
+    <ul>
+      <li><strong>Effortless Discovery:</strong> Immediate visibility into real farm supply currently available in surrounding districts.</li>
+      <li><strong>Clear Volume Metrics:</strong> Instant clarity on whether stock is available in kilograms or bags.</li>
+      <li><strong>Location Transparency:</strong> Displays exact towns and villages to evaluate sourcing distances.</li>
+      <li><strong>Direct Contact:</strong> Eliminates middleman delays with a single click to call the farmer.</li>
+    </ul>
+
+    <h2>Social Impact</h2>
+    <ul>
+      <li><strong>Reduced Post-Harvest Loss:</strong> Faster discovery connects perishable vegetables and fruits with demand before spoilage occurs.</li>
+      <li><strong>Digital Inclusion:</strong> Proves that rural technology adoption increases when complexity is eliminated.</li>
+      <li><strong>Fairer Agricultural Trade:</strong> Encourages transparent, direct relationships between rural food producers and urban retailers.</li>
+    </ul>
+
+    <div class="page-break"></div>
+
+    <!-- ================= 5. UNIQUENESS & PHILOSOPHY ================= -->
+    <h1 id="sec-5">5. Uniqueness & Philosophy</h1>
+    <div class="callout-box quote">
+      <strong>Core Philosophy:</strong><br>
+      ULAVU is designed around simplicity. Instead of forcing farmers to enter extensive information into a complicated marketplace, it asks only for the information required to make their available produce discoverable.
+    </div>
+    <p>
+      Most agricultural software fails because it assumes rural cultivators want to operate like corporate enterprise traders. ULAVU focuses on what farmers currently have harvested today, rather than complex bidding sheets. Software is used purely for discovery, while negotiation happens over direct phone calls.
+    </p>
+    <p>
+      Additionally, the modular architecture provides a clean foundation for future voice and SMS integration, ensuring that farmers with limited smartphone literacy will eventually participate through simple keypad phones.
+    </p>
+
+    <!-- ================= 6. SIX-MODULE ROADMAP ================= -->
+    <h1 id="sec-6">6. Six-Module Roadmap</h1>
+    <p>
+      ULAVU is structured conceptually into six modules. The current prototype fully delivers the core operational tier (Modules 1–3), while Modules 4–6 represent planned future extensions:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 80px;">Module</th>
+          <th>Description</th>
+          <th style="width: 120px;">Current Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Module 1</strong></td>
+          <td>Farmer Profile & Produce posting in kg/bag</td>
+          <td><span class="badge badge-green">Implemented</span></td>
+        </tr>
+        <tr>
+          <td><strong>Module 2</strong></td>
+          <td>Retailer Discovery feed of available farm produce</td>
+          <td><span class="badge badge-green">Implemented</span></td>
+        </tr>
+        <tr>
+          <td><strong>Module 3</strong></td>
+          <td>Direct Farmer–Retailer telephonic connection</td>
+          <td><span class="badge badge-green">Implemented</span></td>
+        </tr>
+        <tr>
+          <td><strong>Module 4</strong></td>
+          <td>Trust & Verification, ratings, and transparency</td>
+          <td><span class="badge badge-neutral">Future Scope</span></td>
+        </tr>
+        <tr>
+          <td><strong>Module 5</strong></td>
+          <td>Analytics & Market Intelligence and supply insights</td>
+          <td><span class="badge badge-neutral">Future Scope</span></td>
+        </tr>
+        <tr>
+          <td><strong>Module 6</strong></td>
+          <td>Voice & SMS Accessibility for non-smartphone users</td>
+          <td><span class="badge badge-neutral">Future Scope</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- ================= 7. WORKFLOW ================= -->
+    <h1 id="sec-7">7. Workflow</h1>
+    <p>
+      The complete operational workflow is visually clear, direct, and free of administrative bottlenecks:
+    </p>
+
+    <div class="diagram-box">
+========================================================================================
+                                 ULAVU SYSTEM WORKFLOW
+========================================================================================
+
+                                     [ FARMER ]
+                                          |
+                                          v
+                            Creates Basic Farmer Profile
+                            (Name + Mobile Number + Location)
+                                          |
+                                          v
+                                Posts Produce Details
+                            (Produce + Quantity + kg/bag + Location)
+                                          |
+                                          v
+                           Listing Becomes Visible Online
+                           (Instantly added to live retailer feed)
+                                          |
+                                          |
+                                    [ RETAILER ]
+                                          |
+                                          v
+                              Browses Available Produce
+                            (Filters by crop or searches location)
+                                          |
+                                          v
+                                  Selects a Listing
+                            (Inspects: Crop, Quantity, Location, Farmer)
+                                          |
+                                          v
+                                Sees Farmer Details
+                            (Farmer Name, Location, Mobile Number)
+                                          |
+                                          v
+                                    Calls Farmer
+                            (Direct telephonic call via native dialer)
+========================================================================================</div>
+
+    <!-- ================= 8. TECHNOLOGY STACK ================= -->
+    <h1 id="sec-8">8. Technology Stack</h1>
+    <p>
+      The ULAVU prototype is built entirely with verified, modern web technologies genuinely present in the codebase:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Technology</th>
+          <th>Genuine Implementation</th>
+          <th>Purpose in ULAVU</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>React 19</strong></td>
+          <td>Frontend library</td>
+          <td>Component-based reactive user interface</td>
+        </tr>
+        <tr>
+          <td><strong>Vite 8</strong></td>
+          <td>Build tool & dev server</td>
+          <td>High-speed bundling and development environment</td>
+        </tr>
+        <tr>
+          <td><strong>Vanilla CSS</strong></td>
+          <td>CSS3 design system</td>
+          <td>Custom agricultural styling, Flexbox, and Grid</td>
+        </tr>
+        <tr>
+          <td><strong>Web Storage API</strong></td>
+          <td>LocalStorage</td>
+          <td>Client-side data persistence across refreshes</td>
+        </tr>
+        <tr>
+          <td><strong>RFC 3966 URI</strong></td>
+          <td><tt>tel:</tt> protocol</td>
+          <td>Direct farmer telephone calling via device dialer</td>
+        </tr>
+        <tr>
+          <td><strong>Node.js / npm</strong></td>
+          <td>Runtime & packaging</td>
+          <td>Local environment and dependency execution</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <!-- ================= 9, 10 & 11 ================= -->
+    <h1 id="sec-9">9. Future Scope</h1>
+    <p>
+      The architecture cleanly accommodates three future modules without modifying the existing core:
+    </p>
+    <ul>
+      <li><strong>Module 4 — Trust & Verification:</strong> Farmer verification via Kisan credentials, commercial trade license checks for buyers, and community reputation ratings.</li>
+      <li><strong>Module 5 — Analytics & Market Intelligence:</strong> District-level crop availability heatmaps, seasonal production insights, and APMC Mandi benchmark price tracking.</li>
+      <li><strong>Module 6 — Voice & SMS Accessibility:</strong> An Interactive Voice Response (IVR) phone gateway where farmers can list crops and receive buyer inquiries via voice calls and SMS without needing a smartphone.</li>
+    </ul>
+
+    <h1 id="sec-10">10. Developer Information</h1>
+    <table>
+      <tbody>
+        <tr>
+          <td style="width: 180px;"><strong>Name</strong></td>
+          <td><strong>Sujith B</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Roll Number</strong></td>
+          <td><strong>2025503560</strong></td>
+        </tr>
+        <tr>
+          <td><strong>College / Campus</strong></td>
+          <td><strong>Anna University - MIT Campus</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Department</strong></td>
+          <td><strong>Computer Science and Engineering (CSE)</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Description</strong></td>
+          <td><em>"I’m a curious and driven tech enthusiast who enjoys learning, building, and experimenting with technology. I’m especially interested in software development, cloud computing, Linux, and AI, and I like turning ideas into practical projects while continuously improving my skills."</em></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h1 id="sec-11">11. Conclusion</h1>
+    <p>
+      <strong>ULAVU</strong> focuses on solving one practical problem well: <strong>helping farmers make their available produce visible to retailers and enabling direct communication between them.</strong>
+    </p>
+    <p>
+      By avoiding complicated onboarding and eliminating unneeded pricing forms, ULAVU creates immediate, practical value for both rural producers and commercial buyers. Its modular six-tier design ensures that the current prototype provides a solid, extensible foundation for future trust, market intelligence, and voice/SMS accessibility capabilities.
+    </p>
+
+    <div style="margin-top: 35px; padding-top: 15px; border-top: 1px solid var(--border-medium); text-align: center; font-size: 8.5pt; color: var(--text-muted);">
+      <strong>ULAVU — Direct Farmer–Retailer Produce Connection Platform</strong><br>
+      Department of Computer Science and Engineering, Anna University - MIT Campus &copy; 2026
+    </div>
+
+  </div>
+
+</body>
+</html>
